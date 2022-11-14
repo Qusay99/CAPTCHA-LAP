@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # setting the landing page as the main site
     path('', include('webapp.urls')),
-    path("", include("django.contrib.auth.urls")),
+    path("", include("django.contrib.auth.urls"))
 ]
 
 if settings.DEBUG:

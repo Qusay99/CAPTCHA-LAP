@@ -1,7 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Comment, Content, Document
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 from django import forms
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -29,6 +32,7 @@ class NewUserForm(UserCreationForm):
                                         ("2", "Female"),
                                         ("3", "Diverse"),
                                         ("4", "Prefer not to say")))
+    # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
     class Meta:
         model = User
@@ -42,7 +46,28 @@ class NewUserForm(UserCreationForm):
             user.save()
         return user
 
+    # def clean(self):
+    #     ca = self.request.POST["g-recaptcha-response"]
+    #     url = "https://www.google.com/recaptcha/api/siteverify"
+    #     params = {
+    #         'secret': config.RECAPTCHA_SECRET_KEY,
+    #         'response': ca,
+    #         'remoteip': utility.get_client_ip(self.request)
+    #     }
+    #     verify_rs = requests.get(url, params=params, verify=True)
+    #     verify_rs = verify_rs.json()
+    #     status = verify_rs.get("success", False)
+    #     if not status:
+    #         raise forms.ValidationError(
+    #             _('Captcha Validation Failed.'),
+    #             code='invalid',
+    #         )
+
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = ["name", "topic", "description" ,"docfile"]
+
+
+
+    

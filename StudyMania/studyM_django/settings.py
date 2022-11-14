@@ -24,7 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-tm@&17)k!#i%=#u23)rv19m^&la%=2($a*^ic9hz92$=74upu0'
-
+RECAPTCHA_PUBLIC_KEY = '6Lfg5fgiAAAAAL3iqlP0FQn7tE1ge9fLGBNRuEtb'
+RECAPTCHA_PRIVATE_KEY = '6Lfg5fgiAAAAALQXJm982ZXKfZDBWPKfFso6OCQg'
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'taggit',
     'webapp.apps.WebappConfig',
+    'captcha',
 ]
 
 MIDDLEWARE = [
